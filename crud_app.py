@@ -71,7 +71,7 @@ player_dictionary = {
         "gold": 10,
     },
     8: {
-        "name": "Karl Vraneth (Javi)",
+        "name": "Karl Vraneth (Jose)",
         "desc": 'Un elfo oscuro sombrío y enigmático, cuyo dominio de la nigromancia le ha ganado una temible reputación. Con cabello largo salpicado de plata y ojos de ónix penetrantes, Vareth es una figura solitaria, prefiriendo la compañía de antiguos textos y sombras. Conocido como "El Invocador de Almas", tiene el poder de convocar y controlar espectros, lo que lo convierte en una figura que infunde terror entre sus enemigos.',
         "itemList": [59, 3, 73, 79],
         "goalList": [8, 11],

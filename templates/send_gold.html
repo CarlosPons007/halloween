@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fortaleza de Naggaroth</title>
+    <link rel="stylesheet" type="text/css" href="../static/styles/style.css">
+</head>
+<body>
+
+<div class="container">
+
+    <h1>Tu personaje</h1>
+
+    <form>
+        <label for="name">Nombre</label>
+        <input readonly type="text" name="name" value="{{ retrieve_dictionary[0][player_id | int].name }}">
+        <textarea readonly>{{ retrieve_dictionary[0][player_id | int].desc }}</textarea>
+        <label for="hitPoint">Puntos de vida</label>
+        <input readonly type="text" name="hitPoint" value="{{ retrieve_dictionary[0][player_id | int].hitPoint }}">
+        <label for="hitPoint">Monedas de oro</label>
+        <input readonly type="text" name="gold" value="{{ retrieve_dictionary[0][player_id | int].gold }}">
+    </form>
+
+    <h1>Acciones disponibles</h1>
+
+    <form id="form">
+        <a href="{{ url_for('menu', player_id=player_id) }}">Volver al menú</a>
+    </form>
+
+    <h1>Dar oro a este otro personaje</h1>
+
+    <form action="{{url_for('send_gold', player_id=player_id)}}", method="post">
+        <select class="player-list" name="target_id">
+            {% for other_player_id in retrieve_dictionary[0] %}
+            {% if (player_id | int) != (other_player_id | int) %}
+            <option value="{{other_player_id}}">{{ retrieve_dictionary[0][other_player_id | int].name }}</option>
+            {% endif %}
+            {%- endfor %}
+        </select>
+        <select class="player-list" name="gold">
+            {% for gold in range(((retrieve_dictionary[0][player_id | int].gold | int) /50) | int) %}
+            <option value="{{ (gold+1) * 50 }}">{{ (gold+1) * 50 }}</option>
+            {%- endfor %}
+        </select>
+        <input type="submit" value="Enviar oro">
+    </form>
+
+</div>
+
+</body>
+</html>

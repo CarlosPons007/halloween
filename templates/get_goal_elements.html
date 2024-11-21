@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fortaleza de Naggaroth</title>
+    <link rel="stylesheet" type="text/css" href="../static/styles/style.css">
+</head>
+<body>
+
+<div class="container">
+
+    <h1>Acciones disponibles</h1>
+
+    <form id="form">
+        <a href="{{ url_for('menu', player_id=player_id) }}">Volver al menú</a>
+    </form>
+
+    <h1>Información general</h1>
+
+    <div>
+        En este juego se supone que somos un poderoso grupo de elfos oscuros, en la ciudad de Har Ganeth.<br>
+        <br>
+        Har Ganeth es una de las ciudades más septentrionales de la Tierra Fría. Sus murallas y torres fueron construidas con el más puro mármol blanco, extraído de las montañas cercanas a las Casas de los Muertos. La Fortaleza de Hielo es fría, cruel y eterna, un símbolo del corazón despiadado de los Druchii (elfos oscuros).<br><br>
+        La partida se desarrolla en tres entornos (hay objetos que solo se pueden usar en determinadas zonas).<br>
+        <b>BOSQUE</b>: El jardín de la casa.<br>
+        <b>FORTALEZA</b>: El comedor de la casa.<br>
+        <b>SUBTERRANEO</b>: La habitación de abajo.<br><br>
+        La partida está divida también en tres actos (el Master puede añadir efectos adicionales).<br>
+        <b>PRIMERO ACTO</b>: Se trata de una reunión de los grandes poderes de Har Ganeth. Hay cinco personas que pertenecen al 'Consejo de la Ciudad'. <b>Al final de este acto</b> votarán quien sale del Consejo y quien entra. El 'Consejo de la Ciudad' es un objeto que se puede DAR de un jugador a otro, traspasando así el derecho de voto. En caso de empate en la votación decide el 'Señor de Har Ganeth'.<br>
+        <b>SEGUNDO ACTO</b>: Hay unos adorador de Tzeentch(Demonio del Caos). <b>Al final de este acto</b> puede que se abra un gigantesco portal al norte de la ciudad hacía el reino del Caos. Esto es una colosal amenaza para los Druchii.<br>
+        <b>TERCER ACTO</b>: Si se ha abierto el portal o si hay una gerra civil (Lilliana de Har Ganeth ya no tiene la 'Corona Hierro Meteórico') entonces ya se pueden sacar los cuchillos y las espadas. La situación se ha vuelto tan caótica que es difícil que seais juzgados por ello. <b>Al final de este acto</b> se puntuarán las misiones.<br><br>
+        Cada personaje tiene una o más clases y puede usarlas. Por ejemplo un guerrero tiene un Manual del Guerrero. Si lo usa recibirá una ACCIÓN GUERRERO. Solo se puede generar una por ACTO. Si tienes una misión que necesitan la ayuda de un guerrero y un nigromante. Deberás tener una ACCIÓN GUERRERO y una ACCIÓN NIGROMANETE en tu inventario para puntuar tu misión.<br><br>
+        Recordad que podeis negociar/dar cualquier objeto de vuestro inventario.<br><br>
+        Cuando termine la partida podemos contar como lo hemos pasado y echarnos unas risas.<br>
+    </div>
+
+    <h1>Listado de misiones</h1>
+
+    <ul class="item-list" id="itemList">
+    {% for item_id in retrieve_dictionary[0][player_id | int].goalList %}
+        {% if item_id in retrieve_dictionary[2] %}
+        <li class="item">
+            <form>
+                <label for="name">Nombre</label>
+                <input readonly type="text" id="name" name="name" value="{{ retrieve_dictionary[2][item_id].name }}">
+                <textarea readonly id="desc">{{ retrieve_dictionary[2][item_id].desc }}</textarea>
+            </form>
+        </li>
+        {% endif %}
+    {%- endfor %}
+    </ul>
+
+</div>
+
+</body>
+</html>

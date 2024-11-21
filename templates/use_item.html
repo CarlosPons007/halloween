@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fortaleza de Naggaroth</title>
+    <link rel="stylesheet" type="text/css" href="../static/styles/style.css">
+</head>
+<body>
+
+<div class="container">
+
+    <h1>Acciones disponibles</h1>
+
+    <form id="form">
+        <a href="{{ url_for('menu', player_id=player_id) }}">Volver al menú</a>
+    </form>
+
+    <h1>Objetos que puedes usar</h1>
+
+    <ul class="item-list" id="itemList">
+    {% for item_id in retrieve_dictionary[1] %}
+        {% if item_id in retrieve_dictionary[0][player_id | int].itemList %}
+        <li class="item">
+            <form action="{{url_for('use_item', player_id=player_id)}}", method="post">
+                <input hidden="true" name="item_id" value="{{ item_id }}">
+                <label for="name">Nombre</label>
+                <input readonly type="text" id="name" name="name" value="{{ retrieve_dictionary[1][item_id].name }}">
+                <textarea readonly id="desc">{{ retrieve_dictionary[1][item_id].desc }}</textarea>
+                {% if (retrieve_dictionary[1][item_id].damage | int) > 0 or retrieve_dictionary[1][item_id].state != '' or (retrieve_dictionary[1][item_id].evolveItem | int) > 0 %}
+                    {% if retrieve_dictionary[1][item_id].name[0:3] == 'ACC' %}
+                    <input type="submit" value="Dar una {{ retrieve_dictionary[1][item_id].name }}">
+                    {% else %}
+                    <input type="submit" value="Usar {{ retrieve_dictionary[1][item_id].name }}">
+                    {% endif %}
+                    <select class="player-list" name="target_id">
+                        {{retrieve_dictionary[1][item_id].name}}
+                        {% if retrieve_dictionary[1][item_id].name[0:7] == ' Manual' %}
+                            <option value="{{player_id}}">Obtener acción (máx. 3/partida)</option>
+                        {% else %}
+                            {% for other_player_id in retrieve_dictionary[0] %}                            
+                            <option value="{{other_player_id}}">Recibe efecto {{ retrieve_dictionary[0][other_player_id | int].name }}</option>
+                            {%- endfor %}
+                        {% endif %}
+                    </select>
+                {% endif %}
+            </form>
+        </li>
+        {% endif %}
+    {%- endfor %}
+    </ul>
+
+</div>
+
+</body>
+</html>

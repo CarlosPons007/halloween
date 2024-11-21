@@ -1,19 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
 <head>
-    <title>{{ title }}</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fortaleza de Naggaroth</title>
+    <link rel="stylesheet" type="text/css" href="../static/styles/style.css">
+</head>
 <body>
-    <div class="App">
-        <header class="App-header">
-            <img src="{{ url_for('static', filename='Octocat.png') }}" class="App-logo" alt="logo" />
-            <p>
-                GitHub Codespaces <span class="heart">♥️</span> Flask
-            </p>
-            <p class="small">
-                Edit <code>templates/index.html</code> and refresh to see your changes!
-            </p>
-        </header>
-    </div>
-</body>
 
+{% if retrieve_dictionary[0][player_id | int] %}
+<div class="container">
+
+    <h1>Tu personaje</h1>
+    <form>
+        <label for="name">Nombre</label>
+        <input readonly type="text" name="name" value="{{ retrieve_dictionary[0][player_id | int].name }}">
+        <textarea readonly>{{ retrieve_dictionary[0][player_id | int].desc }}</textarea>
+        <label for="hitPoint">Puntos de vida</label>
+        <input readonly type="text" name="hitPoint" value="{{ retrieve_dictionary[0][player_id | int].hitPoint }}">
+        <label for="hitPoint">Monedas de oro</label>
+        <input readonly type="text" name="gold" value="{{ retrieve_dictionary[0][player_id | int].gold }}">
+    </form>
+    
+    <h1>Acciones disponibles</h1>
+
+    <form id="form">
+        <a href="{{ url_for('use_item', player_id=player_id) }}">Ver/usar objetos personales</a>
+        <a href="{{ url_for('give_item', player_id=player_id) }}">Dar objeto/acción a otro personaje</a>
+        <a href="{{ url_for('send_gold', player_id=player_id) }}">Dar oro a otro personaje</a>
+        <a href="{{ url_for('get_goal_elements', player_id=player_id) }}">Ver lista de misiones</a>
+    </form>
+
+    <h1>Personajes famosos de Har Ganeth</h1>
+
+    <ul class="item-list" id="itemList">
+    {% for player_id in retrieve_dictionary[0] %}
+        <li class="item">
+            <form>
+            <label for="name">Nombre / descripción / objetos visibles</label>
+            <input readonly type="text" id="name" name="name" value="{{ retrieve_dictionary[0][player_id].name }}">
+            <textarea readonly id="desc">{{ retrieve_dictionary[0][player_id].desc }}</textarea>
+                {% for item_id in retrieve_dictionary[0][player_id | int].itemList %}
+                {% if retrieve_dictionary[1][item_id].outDesc != '' %}
+                <input readonly type="text" value="{{ retrieve_dictionary[1][item_id].outDesc }}">
+                {% endif %}
+                {%- endfor %}
+            <label for="hitPoint">Puntos de vida</label>
+            <input readonly type="text" id="hitPoint" name="hitPoint" value="{{ retrieve_dictionary[0][player_id].hitPoint }}">
+            </form>
+        </li>
+    {%- endfor %}
+    </ul>
+
+</div>
+{% else %}
+<div class="container"> URL acceso incorrecta </div>
+{% endif %}
+</body>
 </html>

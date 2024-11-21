@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fortaleza de Naggaroth</title>
+    <link rel="stylesheet" type="text/css" href="../static/styles/style.css">
+</head>
+<body>
+
+<div class="container">
+
+    <h1>El objeto ha sido recibido por {{ retrieve_dictionary[0][other_player_id | int].name }}</h1>
+
+    <div style="text-align: center;">
+        <img src="{{ url_for('static', filename='images/status-ok.png') }}" style="width:300px; height:200px;">
+    </div>
+
+    <br>
+
+    <form id="form">
+        <a href="{{ url_for('menu', player_id=player_id) }}">Volver al menú</a>
+    </form>
+
+    <br>
+
+</div>
+
+</body>
+</html>

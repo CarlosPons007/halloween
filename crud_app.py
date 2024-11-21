@@ -6,9 +6,9 @@ from flask import Flask, render_template, request
 import pickle, time, os
 from flask_apscheduler import APScheduler
 
-from model.item import Item
-from model.player import Player
-from model.product import Product
+from templates.model.item import Item
+from templates.model.player import Player
+from templates.model.product import Product
 
 app = Flask(__name__, static_folder="static")
 

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fortaleza de Naggaroth</title>
+    <link rel="stylesheet" type="text/css" href="../static/styles/style.css">
+    <script>
+        function copyText() {
+          const inputField = document.getElementById("textInput");
+          inputField.select();
+          inputField.setSelectionRange(0, 99999); // For mobile devices
+          navigator.clipboard.writeText(inputField.value)
+            .then(() => alert("Text copied to clipboard!"))
+            .catch(err => alert("Failed to copy text: " + err));
+        }
+    </script>
+</head>
+<body>
+
+<div class="container">
+
+    <h1>GET_DICTIONARY</h1>
+
+    <form id="form">
+        <a href="{{ url_for('menu', player_id=player_id) }}">RETURN</a>
+    </form>
+
+    <br>
+    <form action="{{url_for('post_dictionary')}}", method="post">
+    <textarea id="textInput" name="textInput">{{ retrieve_dictionary }}</textarea>
+    <a href="#" onclick=copyText()">COPY_TEXT</a>
+    <input type="submit" value="UPDATE_DICT">
+    </form>
+</div>
+
+</body>
+</html>

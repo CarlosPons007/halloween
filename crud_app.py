@@ -1,3 +1,4 @@
+import json
 import string
 from array import array
 from tokenize import String
@@ -14,84 +15,94 @@ app = Flask(__name__, static_folder="static")
 
 global player_dictionary
 player_dictionary = {
-    1: {
+    5638: {
         "name": "Lilliana de Har Ganeth (Silvia)",
-        "desc": 'Una hermosa elfa oscura con ojos amatista penetrantes y cabello negro sedoso que cae hasta su cintura. Lillian es una maestra de la magia de sombras y las pociones alquímicas, conocida por su agudeza y gracia letal. Su actitud tranquila a menudo oculta su oscuro pasado como asesina en el Bastión del Norte, en la frontera con el reino del Caos, donde obtuvo el apodo de "Velo Silencioso".',
-        "itemList": [9, 20, 53, 54, 55, 59, 63, 65, 22],
-        "goalList": [18, 1, 19],
+        "desc": 'Una hermosa elfa oscura de ojos color amatista y cabello negro sedoso que cae hasta su cintura. Lillian es una maestra de la magia de sombras y las pociones alquímicas, conocida por su agudeza y gracia letal. Su actitud tranquila a menudo oculta su oscuro pasado como asesina en el Bastión del Norte, en la frontera con el reino del Caos, donde obtuvo el apodo de "Velo Silencioso".',
+        "itemList": [8, 9, 20, 53, 59, 63, 65, 22],
+        "goalList": [1800, 100, 1900, 2400, 2500],
         "hitPoint": 10,
+        "state": "",
         "gold": 800,
     },
-    2: {
+    8924: {
         "name": "Thalric Draleth (Manolo)",
         "desc": 'Un guerrero experimentado de mandíbula marcada y piel oscura, Thalric lleva las cicatrices de muchas batallas. Sus ojos, tan afilados como sus dos espadas, revelan una determinación feroz por conseguir sus objetivos. Conocido como "La Hoja Susurrante", tiene un silencio casi sobrenatural en sus movimientos, habilidad adquirida durante años en las filas ocultas de la Legión Subterránea y en su estancia en el Bastión del Norte.',
-        "itemList": [1, 59, 67, 6, 24, 81],
-        "goalList": [2, 12, 19],
-        "hitPoint": 10,
+        "itemList": [1, 59, 6, 24, 81, 75, 67],
+        "goalList": [200, 1200, 1900],
+        "hitPoint": 12,
+        "state": "",
         "gold": 200,
     },
-    3: {
+    4172: {
         "name": "Seraphine Noctharis (Daniela)",
         "desc": 'Una misteriosa hechicera elfa oscura con un aura que atrae e inquieta al mismo tiempo. El cabello plateado de Seraphine brilla bajo la luz de la luna, y sus ojos verdes, salpicados de tonos dorados, reflejan una sabiduría más allá de su edad. Experta en magia de ilusiones y reverenciada por su poder para doblar la mente de quienes se le oponen, es conocida como "El Oráculo".',
-        "itemList": [59, 63, 69, 8, 26, 81],
-        "goalList": [3, 13, 34],
+        "itemList": [59, 26, 81, 34, 63, 69],
+        "goalList": [300, 1300, 1600],
         "hitPoint": 10,
+        "state": "",
         "gold": 100,
     },
-    4: {
+    6359: {
         "name": "Kaelen Vasharil (Kaja)",
         "desc": 'Una figura alta y esbelta con un aire de resolución estoica, Kaelen maneja una antigua espada familiar forjada en acero meteórico. Sus ojos cobalto y las runas grabadas en sus brazos lo identifican como un soldado de alto rango. Conocido como "Sombras de Acero", es altamente disciplinado y posee un raro talento en la magia oscura elemental, que usa para ser más letal.',
         "itemList": [13, 7, 28, 81, 82, 82, 59, 67],
-        "goalList": [4, 14, 21],
+        "goalList": [500, 1400, 2100],
         "hitPoint": 10,
+        "state": "",
         "gold": 100,
     },
-    5: {
+    2987: {
         "name": "Elara Duskwraith (Laura)",
         "desc": 'Una ladrona de una belleza inquietante y con una habilidad incomparable en el sigilo y el engaño. Su piel púrpura oscura y su cabello blanco la convierten en una figura impactante en el inframundo. La agudeza mental y agilidad de Elara le han ganado el título de "Filo Espectral", ya que puede infiltrarse en las defensas más vigiladas sin ser detectada. A menudo trabaja como espía, recopilando secretos para la supervivencia de su gente.',
-        "itemList": [59, 77, 5, 10, 30, 81],
-        "goalList": [5, 15],
+        "itemList": [77, 5, 30, 81, 21],
+        "goalList": [400, 1500, 2400, 2600],
         "hitPoint": 10,
+        "state": "",
         "gold": 100,
     },
-    6: {
+    7843: {
         "name": "Zareth Neleum (Luis)",
         "desc": 'Un elfo oscuro corpulento y melancólico, de piel gris ceniza y una red de tatuajes que simbolizan su conexión con la magia de fuego y metal. Zareth es un maestro herrero y luchador formidable, creando armas con oscuros encantamientos. Durante su estancia en el Bastión del Norte, fue conocido como la "Mano del Infierno", por su talento incomparable para dominar las llamas a su antojo, creando infernos que pueden arrasar campos de batalla enteros.',
-        "itemList": [59, 32, 82, 61, 65],
-        "goalList": [6, 16, 21],
+        "itemList": [10, 32, 82, 61, 65],
+        "goalList": [600, 1600, 2100, 2300],
         "hitPoint": 10,
+        "state": "",
         "gold": 50,
     },
-    7: {
+    5216: {
         "name": "Nimeria Morvine (Ma Angeles)",
         "desc": 'Una hechicera de élite conocida por su control sobre la magia de sangre, Nimeria es una figura de belleza inquietante y oscura atracción. Su cabello negro enmarca su piel pálida y perfecta, mientras sus ojos color rubí parecen ver el alma de cada persona. Temida y respetada, es llamada "El Susurro Carmesí", ya que puede controlar la fuerza vital de sus enemigos con solo un encantamiento.',
-        "itemList": [59, 8, 2, 4, 81, 63, 71],
-        "goalList": [7, 17],
+        "itemList": [59, 8, 2, 4, 81, 63, 71, 14],
+        "goalList": [700, 1700, 2400],
         "hitPoint": 10,
+        "state": "",
         "gold": 10,
     },
-    8: {
+    3694: {
         "name": "Karl Vraneth (Jose)",
         "desc": 'Un elfo oscuro sombrío y enigmático, cuyo dominio de la nigromancia le ha ganado una temible reputación. Con cabello largo salpicado de plata y ojos de ónix penetrantes, Vareth es una figura solitaria, prefiriendo la compañía de antiguos textos y sombras. Conocido como "El Invocador de Almas", tiene el poder de convocar y controlar espectros, lo que lo convierte en una figura que infunde terror entre sus enemigos.',
-        "itemList": [59, 3, 73, 79],
-        "goalList": [8, 11],
+        "itemList": [59, 3, 73, 80, 79, 36, 38],
+        "goalList": [800, 1100, 2200, 2300],
         "hitPoint": 10,
+        "state": "",
         "gold": 50,
     },
     9: {
         "name": "Celithra Gilganesh",
         "desc": 'Una elfa oscura de inigualable habilidad en la magia de ilusiones, Celithra es capaz de hacerse invisible o cambiar su apariencia al antojo. Sus ojos de un gris brumoso y su cabello negro como la noche le dan un aspecto casi fantasmal, ganándose el nombre de "El Velo de la Noche". Se dice que puede hacer desaparecer ejércitos completos bajo un hechizo de niebla, confundiendo a sus enemigos hasta su derrota.',
         "itemList": [59, 63],
-        "goalList": [9, 11, 20],
+        "goalList": [900, 1100, 2000],
         "hitPoint": 10,
+        "state": "",
         "gold": 100,
     },
     10: {
         "name": "Draz'ir Indraugnir",
         "desc": "Un guerrero y cazador de temeraria fuerza física, Draz'ir es reconocido por su aguda intuición y habilidades en rastreo. Su piel oscura casi se funde con las sombras del bosque donde vive. Llamado \"Espina Negra\", Draz'ir es experto en emboscadas y se le conoce por usar espinas encantadas en sus trampas para inmovilizar a sus presas. Prefiere observar antes de atacar, y su astucia es tan temida como sus mortales habilidades.",
-        "itemList": [59, 75, 80, 11],
-        "goalList": [10],
+        "itemList": [59, 75, 11],
+        "goalList": [1000],
         "hitPoint": 10,
+        "state": "",
         "gold": 250,
     },
 }
@@ -363,7 +374,7 @@ item_dictionary = {
     },
     30: {
         "name": "Manual para crear: Máscara Arcana",
-        "desc": "Manual para crear una capa que hace invisible al portador y una máscara que oculta su identidad, permitiéndole comprender cualquier lenguaje mientras permanece oculto. <Se necesita Capa de Ocultamiento y Máscara de los Secretos.>",
+        "desc": "Manual para crear una capa que hace invisible al portador y una máscara que oculta su identidad, permitiéndole comprender cualquier lenguaje mientras permanece oculto. <Se necesita Capa de Ocultamiento y Máscara de los Secretos. Solo se puede crear en el BOSQUE.>",
         "outDesc": "Un tomo polvoriento",
         "damage": 0,
         "state": "",
@@ -383,8 +394,8 @@ item_dictionary = {
         "name": "Manual para crear: Daga del Sueño Eterno",
         "desc": "Manual para crear una daga encantada que no solo drena energía, sino que también envenena a quien la recibe, dejándolo atrapado en una espiral de alucinaciones. <Se necesita Daga de Penumbra y Polvo de Sueños Oscuros.>",
         "outDesc": "Un codice antiguo",
-        "damage": 2,
-        "state": "Aturdido",
+        "damage": 0,
+        "state": "",
         "listPrevItem": [13, 21],
         "evolveItem": 33,
     },
@@ -406,15 +417,42 @@ item_dictionary = {
         "listPrevItem": [8],
         "evolveItem": 35,
     },
-        35: {
+    35: {
         "name": "Portal mágico",
-        "desc": "Abre un portal mágico al reino del caos. <Solo se puede usar hablando con el Master en el BOSQUE.>",
+        "desc": "Abre un portal mágico al reino del caos. <Solo se puede usar en el BOSQUE, hablando con el Master.>",
         "outDesc": "Un fulgor mágico recorre el cuerpo del portador",
         "damage": 0,
         "state": "",
         "listPrevItem": [],
         "evolveItem": 0,
-    },    
+    },
+    36: {
+        "name": "Manual para crear: Cementerio de No-Muertos",
+        "desc": "Manual para crear un Cementerio de No-Muertos desde el que revivir muertos vivientes. <Se necesita ACCIÓN NIGROMANTE más una de TAUMATURGO y solo se puede usar en el SUBTERRANEO, hablando con el Master.>",
+        "outDesc": "Un codice con runas mágicas",
+        "damage": 0,
+        "state": "",
+        "listPrevItem": [72, 74],
+        "evolveItem": 37,
+    },
+    37: {
+        "name": "Cementerio de No-Muertos",
+        "desc": "Crea un espacio desde el que levantar un ejército de No-muertos. <Puedes decidir, una vez por partida, durante todo un ACTO que bloqueas el paso entre el SUBTERRANEO y la FORTALEZA. Solo se podría acceder por medios mágicos.>",
+        "outDesc": "",
+        "damage": 0,
+        "state": "",
+        "listPrevItem": [],
+        "evolveItem": 0,
+    },
+    38: {
+        "name": "Máscara de la Muerte",
+        "desc": "La máscara es un artefacto oscuro y retorcido. Está forjada de un metal negro como la obsidiana, incrustada con runas mágicas que parecen palpitar con una energía maligna. Su diseño es grotesco, representando una amalgama de rostros distorsionados por el dolor y el miedo, con ojos huecos que parecen mirar directamente al alma. El jugador objetivo queda ASUSTADO.",
+        "outDesc": "Un máscara oscura con un aura de terror.",
+        "damage": 0,
+        "state": "Asustado",
+        "listPrevItem": [],
+        "evolveItem": 0,
+    },
     53: {
         "name": "Botas de cuero",
         "desc": "Botas resistentes hechas de cuero curtido, ideales para largos viajes por caminos difíciles. <No tienen efecto en combate, pero mejoran la velocidad de desplazamiento en terreno complicado.>",
@@ -693,90 +731,110 @@ pickle.dump(item_dictionary, file)
 file.close()
 global goal_dictionary
 goal_dictionary = {
-    1: {
+    100: {
         "name": "Recuperar el Corazón de Sombras",
         "desc": "La gema mística fue robada y necesita ser devuelta antes del solsticio de Nimrod. Necesitarás un explorador para buscar su ubicación, pero solo colaborará si un taumaturgo le proporciona ciertos ingredientes prohibidos.",
     },
-    2: {
+    200: {
         "name": "La protección del Bosque Muerto",
         "desc": "Frente a la bahía de Devdorer se encuentra el Bosque Muerto, la magia que protege el bosque está debilitándose, y solo un hechicero conoce el conjuro para restaurarla. Sin embargo, para completar el ritual, un guerrero debe protegerlo de los espíritus del oscuro bosque durante la ceremonia.",
     },
-    3: {
+    300: {
         "name": "Los verdugos de Hag Ganeth",
         "desc": "Los verdugos de Hag Ganeth está planeando un ataque contra nuestro clan. Para evitarlo, necesitamos un general de gran valía que lidere a nuestro clan y un ejército que disuada a nuestro enemigo. Otra opción es buscar a un ladrón que nos consiga el Amuleto Negro, el objeto más preciado de los verdugos.",
     },
-    4: {
+    400: {
         "name": "Operación de Contraespionaje",
         "desc": "Los altos elfos envían espías a nuestras aldeas. Necesitamos un taumaturgo puede realizar un ritual que desenmascare a los infiltrados antes de que actúen.",
     },
-    5: {
+    500: {
         "name": "Ladrones de joyas",
         "desc": "La interminable guerra del norte y una serie de robos han dejado a nuestro clan al borde de la quiebra. Un ladrón experto puede identificar al culpable, pero requiere la ayuda de una adivinadora para prever el próximo robo y atrapar al ladrón en el acto.",
     },
-    6: {
+    600: {
         "name": "Conseguir hidras de guerra",
-        "desc": "Una plaga ha infectado las cuevas de Naggaroth. Un taumaturgo puede realizar un ritual para purificar la zona, pero necesita la protección de varios guerreros para defenderlo de criaturas corrompidas durante el proceso.",
+        "desc": "Una plaga de demonios ha infectado las cuevas de Naggaroth. Un taumaturgo puede realizar un ritual para purificar la zona, pero necesitarás también un guerrero de élite para capturar una hidra de guerra.",
     },
-    7: {
+    700: {
         "name": "La Visión de la Adivinadora",
-        "desc": "Un ataque se cierne sobre las murallas de Har Ganeth, y solo una adivinadora conoce detalles precisos. Sin embargo, compartirá su visión solo si un nigromante y un taumaturgo colaboran para abrir un Portal Mágico hacia Ragnandu. Si el ataque no se evita, todos los personajes sufrirán daños.",
+        "desc": "Un ataque se cierne sobre las murallas de Har Ganeth y solo una pitonisa humana conoce detalles precisos. Sin embargo, compartirá su visión solo si un nigromante y un taumaturgo colaboran para disipar el velo del futuro. Si no se hace esta misión, al final del ACTO PRIMERO, todos los personajes sufrirán [1D4-1] daños.",
     },
-    8: {
+    800: {
         "name": "El Rito de Ascensión",
         "desc": "Deseas ascender al trono y necesita el respaldo de un hechicero. El hechicero, sin embargo, solo acepta realizar el rito si un guerrero y un nigromante ayudan a estabilizar los efectos mágicos de la ceremonia.",
     },
-    9: {
+    900: {
         "name": "Recuperar el Tótem de Hexoatl",
         "desc": "El poderoso tótem ha sido robado por los eslizones. Un nigromante sabe cómo encontrarlo, pero solicita la ayuda de un explorador para infiltrarse en el santuario Hexoatl donde se encuentra escondido, y de un guerrero para proteger la reliquia en el regreso.",
     },
-    10: {
+    1000: {
         "name": "Eliminar la Maldición de los Cuervos",
         "desc": "Un poderoso conjuro ha sido lanzado desde una torre de hechicería sobre Har Ganeth. Un hechicero poderoso puede disipar el conjuro, pero para ello necesita la ayuda de una adivinadora para ubicar el origen exacto de la maldición.",
     },
-    11: {
+    1100: {
         "name": "Conseguir oro",
-        "desc": "Necesitas conseguir un total de 500 monedas para mantener al ejército mercenario.",
+        "desc": "Necesitas conseguir un total de 500 monedas para mantener el ejército de tu casa.",
     },
-    12: {
+    1200: {
         "name": "Conseguir la Espada de Sombra y Sigilo",
         "desc": "Una espada que se vuelve completamente invisible en la oscuridad. Consigue la Espada de Sombra y Sigilo para moverte sin ser detectado.",
     },
-    13: {
+    1300: {
         "name": "Conseguir el Cetro del Susurro Oscuro",
         "desc": "Un cetro antiguo que permite al portador comunicarse con los muertos y controlar la magia de las sombras. Consigue el Cetro del Susurro Oscuro para desvelar oscuros secretos.",
     },
-    14: {
+    1400: {
         "name": "Conseguir el Talisman de Teletransporte Sombrío",
         "desc": "Un talismán que permite teletransportarse rápidamente mientras se invoca un espectro para ocultar al usuario. Consigue el Talisman de Teletransporte Sombrío para moverte rápidamente entre los planos.",
     },
-    15: {
+    1500: {
         "name": "Conseguir el Guantelete Oscuro del Poder Supremo",
         "desc": "Un guantelete que otorga al portador un poder abrumador, reforzado por la magia oscura de un vial. Consigue el Guantelete Oscuro del Poder Supremo para aumentar tu poder físico y mágico.",
     },
-    16: {
+    1600: {
         "name": "Conseguir la Máscara Arcana",
         "desc": "Una máscara que no solo oculta al portador, sino que le otorga la capacidad de entender y hablar todos los idiomas secretos. Consigue la Máscara Arcana para desbloquear secretos olvidados.",
     },
-    17: {
+    1700: {
         "name": "Conseguir la Daga del Sueño Eterno",
         "desc": "Una daga encantada que drena energía y deja a la víctima atrapada en alucinaciones interminables. Consigue la Daga del Sueño Eterno para causar estragos en tus enemigos.",
     },
-    18: {
+    1800: {
         "name": "Dominar Har Ganeth",
         "desc": "Al final del TERCER ACTO debes tener en tu inventario la 'Corona Hierro Meteórico' para demostrar tu poder.",
     },
-    19: {
+    1900: {
         "name": "Descubrir a los adoradores",
         "desc": "Cuando estuviste en el Bastión del Norte viste el poder de los demonios del caos. Sabes que algunos de tus compañeros [Lilliana de Har Ganeth (Silvia), Zareth Neleum (Luis) y Thalric Draleth (Manolo)] se dejaron seducir por el Caos. Descubre al menos un 'Adorador de Tzeentch'.",
     },
-    20: {
+    2000: {
         "name": "Abrazar las enseñanzas de Tzeentch, dios del caos ",
         "desc": "Debes convertirte en un 'Adorador de Tzeentch' para acceder a nuevas esferas de poder. Sabes que en el Bastión del Norte cerca de la frontera con el mundo de los demonios, se han creado muchos adoradores.",
     },  
-    21: {
+    2100: {
         "name": "Abrir un Portal",
-        "desc": "Debes encontrar al otro 'Adorador de Tzeentch'. Sabes que en el Bastión del Norte cerca de la frontera con el mundo de los demonios, se han creado muchos adoradores. Debes crear un Portal Mágico en el BOSQUE en el ACTO DOS.",
-    },  
+        "desc": "Debes encontrar al otro 'Adorador de Tzeentch'. Sabes que en el Bastión del Norte cerca de la frontera con el mundo de los demonios, se han iniciado muchos adoradores. Debes crear un Portal Mágico en el BOSQUE en el ACTO DOS.",
+    },
+    2200: {
+        "name": "Convertirte en Señor de Har Ganeth",
+        "desc": "Debes conseguir la 'Corona Hierro Meteórico' aunque sabes que con ello empezará una guerra civil en Har Ganeth.",
+    },
+    2300: {
+        "name": "Ser parte del Consejo de la Ciudad",
+        "desc": "Debes conseguir el medallón que te convierte en parte del grupo más influyente de Har Ganeth. Necesitas ser miembro del 'Consejo de la Ciudad'.",
+    },
+    2400: {
+        "name": "Secta de los Mil Placeres",
+        "desc": "Eres parte una secta hedonista y nihilista fundada por un grupo de elfos oscuros carentes de escrúpulos, cuyo único propósito es buscar la gratificación personal en todas sus formas, sin importar las consecuencias. Esta secta rechaza los códigos morales y éticos tradicionales, abrazando un estilo de vida que combina el lujo, el caos y una devoción extrema al exceso. Debes encontrar a los otros miembros de esta secta.",
+    },
+    2500: {
+        "name": "Muerte a la casa Morvine",
+        "desc": "La casa de Nimeria Morvine (Ma Angeles) debe desaparecer. Tu casa está en peligro mientras siga ostentando el poder. Debe morir para cumplir tu objetivo. Recuerda que las armas solo se pueden usar en el tercer ACTO y si hay un portal mágico del caos o una guerra civil.",
+    },
+    2600: {
+        "name": "Muerte a la casa Neleum",
+        "desc": "La casa de Zareth Neleum (Luis) debe desaparecer. Tu casa está en peligro mientras siga ostentando el poder. Debe morir para cumplir tu objetivo. Recuerda que las armas solo se pueden usar en el tercer ACTO y si hay un portal mágico del caos o una guerra civil.",
+    },
 }
 file = open("goal_dictionary_file.pkl", "wb")
 pickle.dump(goal_dictionary, file)
@@ -785,17 +843,20 @@ global state_dictionary
 state_dictionary = {
     1: {
         "name": "Asustado",
-        "efect": "(Un uso) Un personaje asustado debe dar uno de sus objetos a quien se lo pida. Puede negarse sufriendo 3 daños.",
+        "efect": "(Un uso) Un personaje asustado debe dar uno de sus objetos a quien se lo pida.",
     },
     2: {
         "name": "Aturdido",
         "efect": "El personaje aturdido solo puede abstenerse en las votaciones.",
     },
-    3: {"name": "Cegado", "efect": ""},
-    4: {"name": "Inconsciente", "efect": ""},
-    5: {"name": "Envenenado", "efect": ""},
-    6: {"name": "Hechizado", "efect": ""},
-    7: {"name": "Paralizado", "efect": ""},
+    3: {
+        "name": "Cegado",
+        "efect": "El personaje cegado debe actuar durante el resto del acto con los ojos vendados."
+    },
+    4: {
+        "name": "Envenenado",
+        "efect": "El personaje sufre al final de cada ACTO un daño de [1D4-1]"
+    },
 }
 file = open("state_dictionary_file.pkl", "wb")
 pickle.dump(state_dictionary, file)
@@ -971,6 +1032,30 @@ def get_goal_elements(player_id):
         "/get_goal_elements.html", retrieve_dictionary=dictionary, player_id=player_id
     )
 
+# GET
+@app.route("/get_dict")
+def get_dictionary():
+    file = open("dictionary_file.pkl", "rb")
+    dictionary = pickle.load(file)
+    file.close()
+    json_dictionary = json.dumps(dictionary, indent=4)
+    return render_template(
+        "/get_dictionary.html", retrieve_dictionary=json_dictionary
+    )
+
+# POST
+@app.route("/post_dict", methods=["POST"])
+def post_dictionary():
+    data = json.loads(request.form["textInput"])
+    converted_data = [
+        {int(key): value for key, value in item.items()} for item in data
+    ]
+    file = open("dictionary_file.pkl", "wb")
+    pickle.dump(converted_data, file)
+    file.close()
+    return render_template(
+        "/index.html", retrieve_dictionary=converted_data, player_id='5638'
+    )
 
 # GET
 @app.route("/send_gold/<player_id>")

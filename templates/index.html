@@ -7,7 +7,6 @@
     <link rel="stylesheet" type="text/css" href="../static/styles/style.css">
 </head>
 <body>
-
 {% if retrieve_dictionary[0][player_id | int] %}
 <div class="container">
 
@@ -20,6 +19,8 @@
         <input readonly type="text" name="hitPoint" value="{{ retrieve_dictionary[0][player_id | int].hitPoint }}">
         <label for="hitPoint">Monedas de oro</label>
         <input readonly type="text" name="gold" value="{{ retrieve_dictionary[0][player_id | int].gold }}">
+        <label for="hitPoint">Estado</label>
+        <input readonly type="text" name="state" value="{{ retrieve_dictionary[0][player_id | int].state }}">
     </form>
     
     <h1>Acciones disponibles</h1>

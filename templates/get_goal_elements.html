@@ -22,7 +22,7 @@
         En este juego se supone que somos un poderoso grupo de elfos oscuros, en la ciudad de Har Ganeth.<br>
         <br>
         Har Ganeth es una de las ciudades más septentrionales de la Tierra Fría. Sus murallas y torres fueron construidas con el más puro mármol blanco, extraído de las montañas cercanas a las Casas de los Muertos. La Fortaleza de Hielo es fría, cruel y eterna, un símbolo del corazón despiadado de los Druchii (elfos oscuros).<br><br>
-        La partida se desarrolla en tres entornos (hay objetos que solo se pueden usar en determinadas zonas).<br>
+        La partida se desarrolla en tres entornos. Hay objetos que solo se pueden usar en determinadas zonas. Para hacer algo sobre otro jugador, debes estar en la misma zona.<br>
         <b>BOSQUE</b>: El jardín de la casa.<br>
         <b>FORTALEZA</b>: El comedor de la casa.<br>
         <b>SUBTERRANEO</b>: La habitación de abajo.<br><br>
@@ -34,6 +34,20 @@
         Recordad que podeis negociar/dar cualquier objeto de vuestro inventario.<br><br>
         Cuando termine la partida podemos contar como lo hemos pasado y echarnos unas risas.<br>
     </div>
+
+    <h1>Lista estados y efecto sobre los jugadores</h1>
+
+    <ul class="item-list" id="itemListStates">
+        {% for item_id in retrieve_dictionary[3] %}
+        <li class="item">
+            <form>
+                <label for="name">Nombre / efecto</label>
+                <input readonly type="text" id="nameStates" name="name" value="{{ retrieve_dictionary[3][item_id].name }}">
+                <input readonly type="text" id="efectState" name="state" value="{{ retrieve_dictionary[3][item_id].efect }}">
+            </form>
+        </li>
+        {%- endfor %}
+    </ul>
 
     <h1>Listado de misiones</h1>
 

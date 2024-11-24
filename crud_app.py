@@ -25,7 +25,7 @@ player_dictionary = {
         "gold": 800,
     },
     8924: {
-        "name": "Thalric Draleth (Manolo)",
+        "name": "Thalric Draleth (Gerard)",
         "desc": 'Un guerrero experimentado de mandíbula marcada y piel oscura, Thalric lleva las cicatrices de muchas batallas. Sus ojos, tan afilados como sus dos espadas, revelan una determinación feroz por conseguir sus objetivos. Conocido como "La Hoja Susurrante", tiene un silencio casi sobrenatural en sus movimientos, habilidad adquirida durante años en las filas ocultas de la Legión Subterránea y en su estancia en el Bastión del Norte.',
         "itemList": [1, 59, 6, 24, 81, 75, 67],
         "goalList": [200, 1200, 1900],
@@ -805,7 +805,7 @@ goal_dictionary = {
     },
     1900: {
         "name": "Descubrir a los adoradores",
-        "desc": "Cuando estuviste en el Bastión del Norte viste el poder de los demonios del caos. Sabes que algunos de tus compañeros [Lilliana de Har Ganeth (Silvia), Zareth Neleum (Luis) y Thalric Draleth (Manolo)] se dejaron seducir por el Caos. Descubre al menos un 'Adorador de Tzeentch'.",
+        "desc": "Cuando estuviste en el Bastión del Norte viste el poder de los demonios del caos. Sabes que algunos de tus compañeros [Lilliana de Har Ganeth (Silvia), Zareth Neleum (Luis) y Thalric Draleth (Gerard)] se dejaron seducir por el Caos. Descubre al menos un 'Adorador de Tzeentch'.",
     },
     2000: {
         "name": "Abrazar las enseñanzas de Tzeentch, dios del caos ",
